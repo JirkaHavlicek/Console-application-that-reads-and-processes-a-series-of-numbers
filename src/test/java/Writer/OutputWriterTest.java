@@ -8,7 +8,7 @@ import java.io.PrintStream;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class OutputWriterTest {
 
@@ -24,7 +24,7 @@ class OutputWriterTest {
         outputWriter.writeOutput(numbers, null);
 
         String expectedOutput = "2\n4\n6\n8\n";
-        assertEquals(expectedOutput, outputStream.toString());
+        assertEquals(expectedOutput, outputStream.toString().replaceAll("\\r\\n", "\n"));
 
 
         System.setOut(System.out);

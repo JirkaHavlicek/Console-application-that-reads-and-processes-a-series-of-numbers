@@ -1,4 +1,3 @@
-import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayInputStream;
@@ -9,6 +8,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class MainTest {
     @Test
@@ -22,8 +23,8 @@ class MainTest {
 
         Main.main(args);
 
-        String expectedOutput = "2\n4\n";
-        assertEquals(expectedOutput, outputStream.toString());
+        String expectedOutput = "Zadejte čísla (ukončete stiskem Enter na prázdném řádku):\n2\n4\n";
+        assertEquals(expectedOutput, outputStream.toString().replaceAll("\\r\\n", "\n"));
     }
 
     @Test
@@ -40,8 +41,7 @@ class MainTest {
         Main.main(args);
 
         String expectedOutput = "2\n4\n";
-        assertEquals(expectedOutput, outputStream.toString());
-
+        assertEquals(expectedOutput, outputStream.toString().replaceAll("\\r\\n", "\n"));
         Files.deleteIfExists(inputFilePath);
     }
 
@@ -63,7 +63,6 @@ class MainTest {
         assertEquals(expectedOutput, actualOutput);
 
         Files.deleteIfExists(inputFilePath);
-        Files.deleteIfExists(outputFilePath);
     }
 }
 

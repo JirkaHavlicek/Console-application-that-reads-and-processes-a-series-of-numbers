@@ -13,7 +13,6 @@ public class NumberReader {
 
         try {
             if (inputPath.matches("\\d+")) {
-
                 BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
                 System.out.println("Zadejte čísla (ukončete stiskem Enter na prázdném řádku):");
                 String line;
@@ -27,16 +26,16 @@ public class NumberReader {
                     }
                 }
             } else {
+                try (BufferedReader reader = new BufferedReader(new FileReader(inputPath))) {
+                    String line;
+                    while ((line = reader.readLine()) != null) {
 
-                BufferedReader reader = new BufferedReader(new FileReader(inputPath));
-                String line;
-                while ((line = reader.readLine()) != null) {
-
-                    try {
-                        int number = Integer.parseInt(line);
-                        numbers.add(number);
-                    } catch (NumberFormatException e) {
-                        System.err.println("Chyba: Neplatné číslo ve souboru. Ignorováno.");
+                        try {
+                            int number = Integer.parseInt(line);
+                            numbers.add(number);
+                        } catch (NumberFormatException e) {
+                            System.err.println("Chyba: Neplatné číslo ve souboru. Ignorováno.");
+                        }
                     }
                 }
             }
